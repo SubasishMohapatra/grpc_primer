@@ -1,2 +1,2 @@
 # grpc_primer
-Learn GRPC with .Net core
+Fast track your GRPC learning with .Net core
