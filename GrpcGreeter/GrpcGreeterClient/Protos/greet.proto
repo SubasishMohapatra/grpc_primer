@@ -4,10 +4,13 @@ option csharp_namespace = "GrpcGreeterClient";
 
 package greet;
 
+import "google/protobuf/empty.proto";
+
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc SendCollectionData (google.protobuf.Empty) returns (SampleCollection);
 }
 
 // The request message containing the user's name.
@@ -18,4 +21,9 @@ message HelloRequest {
 // The response message containing the greetings.
 message HelloReply {
   string message = 1;
+}
+
+//The response message contains list of string data
+message SampleCollection {
+  repeated string messages = 1;
 }

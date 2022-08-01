@@ -1,5 +1,5 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using GrpcGreeterServer;
 
 namespace GrpcGreeterServer.Services;
 
@@ -17,5 +17,15 @@ public class GreeterService : Greeter.GreeterBase
         {
             Message = "Hello " + request.Name
         });
+    }
+
+    public override Task<SampleCollection> SendCollectionData(Empty request, ServerCallContext context)
+    {
+        var sampleData = new SampleCollection();
+        for (var i = 0; i < 5; i++)
+        {
+            sampleData.Messages.Add($"Message {i}");
+        }
+        return Task.FromResult(sampleData);
     }
 }

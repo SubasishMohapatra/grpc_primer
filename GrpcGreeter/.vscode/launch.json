@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [       
+        {
+            "name": "GRPCClient(console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/GrpcGreeterClient/bin/Debug/net6.0/GrpcGreeterClient.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/GrpcGreeterClient",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "GRPCService(console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/GrpcGreeterServer/bin/Debug/net6.0/GrpcGreeterServer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/GrpcGreeterServer",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
