@@ -20,8 +20,29 @@ namespace GrpcGreeterClient
                 Console.WriteLine(message);
             }
             Console.WriteLine("Greeting: " + reply.Message);
+
+            var getPeople = await client.GetAllPeopleAsync(new Empty(), new CallOptions());
+            switch (getPeople.ResultCase)
+            {
+                case GetAllPeopleResponse.ResultOneofCase.Error:
+                    Console.WriteLine($"Error retrieving result -{getPeople.Error.ErrorMessage}");
+                    break;
+                case GetAllPeopleResponse.ResultOneofCase.People:
+                    await HandleGetAllPeople(getPeople.People);
+                    break;
+
+            }
             Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
+            Console.ReadLine();
+        }
+
+        private static async Task HandleGetAllPeople(People people)
+        {
+            foreach (var person in people.GetAll)
+            {
+                Console.WriteLine($"Name:{person.Name}, Age: {person.Age}");
+            }
+            await Task.CompletedTask;
         }
     }
 }
