@@ -31,13 +31,15 @@ public class GreeterService : Greeter.GreeterBase
 
     public override Task<GetAllPeopleResponse> GetAllPeople(Empty request, ServerCallContext context)
     {
-        var getAllPeopleResponseWithError = new GetAllPeopleResponse() {Error=new Error(){ErrorMessage="Bad data"} };
-        return Task.FromResult(getAllPeopleResponseWithError);
-        // var getAllPeopleResponse = new GetAllPeopleResponse() { People = new People() };
-        // for (var i = 1; i <= 5; i++)
-        // {
-        //     getAllPeopleResponse.People.GetAll.Add(new Person() { Name = $"Person- {i}", Age = i * 10 });
-        // }
-        // return Task.FromResult(getAllPeopleResponse);
+        #region Return error
+        // var getAllPeopleResponseWithError = new GetAllPeopleResponse() {Error=new Error(){ErrorMessage="Bad data"} };
+        // return Task.FromResult(getAllPeopleResponseWithError);
+        #endregion
+        var getAllPeopleResponse = new GetAllPeopleResponse() { People = new People() };
+        for (var i = 1; i <= 5; i++)
+        {
+            getAllPeopleResponse.People.GetAll.Add(new Person() { Name = $"Person- {i}", Age = i * 10 });
+        }
+        return Task.FromResult(getAllPeopleResponse);
     }
 }
