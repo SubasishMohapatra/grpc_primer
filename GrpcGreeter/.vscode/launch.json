@@ -27,6 +27,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "GRPCWorker(BackgroundService)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/GrpcWorkerProcess/bin/Debug/net6.0/GrpcWorkerProcess.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/GrpcWorkerProcess",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
