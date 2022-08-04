@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcWebAPIClient";
+
+package greet;
+
+import "google/protobuf/empty.proto";
+
+// The greeting service definition.
+service Greeter {
+  rpc GetAllPeople (google.protobuf.Empty) returns (GetAllPeopleResponse);
+}
+
+message Person{
+  string name=1;
+  int32 age=2;
+}
+
+message Error{
+string errorMessage=1;
+}
+
+message People{
+  repeated Person GetAll=1;
+}
+
+message GetAllPeopleResponse{
+  oneof result{
+    Error error=1;
+    People people=2;
+  }
+}
