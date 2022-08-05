@@ -1,5 +1,6 @@
 using GrpcWebAPIClient;
 using Microsoft.AspNetCore.Builder;
+using GrpcWeatherServer;
 
 public partial class Program
 {
@@ -13,9 +14,11 @@ public partial class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddGrpcClient<Greeter.GreeterClient>("WeatherServiceClient", o =>
+        builder.Services.AddScoped<WeatherAppService>();
+        builder.Services.AddGrpcClient<WeatherService.WeatherServiceClient>("WeatherServiceClient", o =>
                {
-                   o.Address = new Uri("http://localhost:5214");
+                //    o.Address = new Uri("http://localhost:5249");
+                   o.Address = new Uri("https://localhost:7238");
                });
         var app = builder.Build();
 

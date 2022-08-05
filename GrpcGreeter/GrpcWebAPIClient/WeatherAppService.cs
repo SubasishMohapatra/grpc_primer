@@ -18,22 +18,21 @@ namespace GrpcWebAPIClient
             this.logger=logger;
         }
 
-        public async Task<string> GetWeatherForecaseForNext5Days()
+        public async Task<(string, Google.Protobuf.Collections.RepeatedField<GrpcWeatherServer.Weather>)> GetWeatherForecaseForNext5Days()
         {
+            var errorMessage="";
             var response= await client.GetWeatherReportForNext5DaysAsync(new Empty(), new CallOptions());
-            Google.Protobuf.Collections.RepeatedField<GrpcWeatherServer.Weather> result;
+            Google.Protobuf.Collections.RepeatedField<GrpcWeatherServer.Weather> result=null;
             switch (response.ResultCase)
             {
                 case GetWeatherForecastResponse.ResultOneofCase.Error:
-                    logger.LogError($"Error retrieving result -{response.Error.ErrorMessage}");
+                    errorMessage=$"Error retrieving result -{response.Error.ErrorMessage}";
                     break;
                 case GetWeatherForecastResponse.ResultOneofCase.WeatherForeCast:
                     result= response.WeatherForeCast.Data;
-                    var formatter = new JsonFormatter(new JsonFormatter.Settings(true));
-                    return formatter.Format(result);
-                    // break;
+                    break;
             }
-           return null;
+           return (errorMessage,result);
         }
     }
 }

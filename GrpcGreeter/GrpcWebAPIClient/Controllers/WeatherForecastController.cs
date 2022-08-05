@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using GrpcWeatherServer;
 
 namespace GrpcWebAPIClient.Controllers;
 
@@ -6,16 +7,17 @@ namespace GrpcWebAPIClient.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    private readonly ILogger<WeatherForecastController> logger;
+    private readonly WeatherAppService weatherAppService;
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherAppService weatherAppService)
     {
-        _logger = logger;
+        logger = logger;
+        this.weatherAppService=weatherAppService;
     }
 
-    // [HttpGet(Name = "GetWeatherForecast")]
-    // public IEnumerable<Weather> Get()
-    // {
-    //   return null;
-    // }
+    [HttpGet(Name = "GetWeatherForecast")]
+    public  Task<(string, Google.Protobuf.Collections.RepeatedField<GrpcWeatherServer.Weather>)> Get()
+    {
+      return this.weatherAppService.GetWeatherForecaseForNext5Days();
+    }
 }
