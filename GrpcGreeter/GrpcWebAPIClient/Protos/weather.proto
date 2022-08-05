@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcWeatherServer";
+
+package weather;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// The greeting service definition.
+service WeatherService {
+  // Sends a greeting
+  rpc GetWeatherReportForNext5Days (google.protobuf.Empty) returns (GetWeatherForecastResponse);
+}
+
+message Weather{
+    google.protobuf.Timestamp date = 1;
+    int32 temperatureC =2;
+    int32 temperatureF =3;
+    string summary= 4;
+}
+
+message Error{
+string errorMessage=1;
+}
+
+message WeatherForeCast{
+  repeated Weather data=1;
+}
+
+message GetWeatherForecastResponse{
+  oneof result{
+    Error error=1;
+    WeatherForeCast weatherForeCast=2;
+  }
+}

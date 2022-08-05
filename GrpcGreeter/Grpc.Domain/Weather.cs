@@ -1,6 +1,6 @@
-namespace GrpcWebAPIClient;
+namespace Grpc.Domain;
 
-public class WeatherForecast
+public class Weather
 {
     public DateTime Date { get; set; }
 
