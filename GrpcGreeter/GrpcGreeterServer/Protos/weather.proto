@@ -11,6 +11,7 @@ import "google/protobuf/timestamp.proto";
 service WeatherService {
   // Sends a greeting
   rpc GetWeatherReportForNext5Days (google.protobuf.Empty) returns (GetWeatherForecastResponse);
+  rpc StreamWeatherReport (google.protobuf.Empty) returns (stream Weather);
 }
 
 message Weather{
